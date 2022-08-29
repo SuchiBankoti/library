@@ -7,7 +7,7 @@ body {
     flex-wrap: wrap;
 }
 
-#book {
+.book {
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -37,10 +37,14 @@ class bookDetail {
 
 function bookDisplay() {
     while (i < myLibrary.length) {
-        addBookToDisplay.innerHTML += `<ul id="book"><li> NAME OF THE BOOK :${myLibrary[i].name}</li>
+        addBookToDisplay.innerHTML += `<ul class="book"><li> NAME OF THE BOOK :${myLibrary[i].name}</li>
         <li> AUTHOR : ${myLibrary[i].author}</li>
-        <li> PUBLISH YEAR : ${myLibrary[i].publishYear}</li></ul>`
+        <li> PUBLISH YEAR : ${myLibrary[i].publishYear}</li>
+        <button class="remove">remove</button>
+        </ul>`
         i++
+
+
     }
 
 }
@@ -60,3 +64,10 @@ btnAddBook.addEventListener("click", addBookToLibrary)
 
 bookDisplay()
 
+const btnRemove = document.getElementsByClassName("remove")
+for (let b = 0; b < btnRemove.length; b++) {
+    function removeBook() {
+        console.log("remove book")
+    }
+    btnRemove[b].addEventListener("click", removeBook)
+}
