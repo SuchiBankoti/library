@@ -1,5 +1,6 @@
 let myLibrary = [
     {
+        id: 'kljsdkljflksjf',
         name: "rings of fire",
         author: "J.R Tolkein",
         publishYear: 1960
@@ -24,7 +25,6 @@ let myLibrary = [
         publishYear: 5678
     }
 ]
-let i = 0
 
 
 class bookDetail {
@@ -35,18 +35,21 @@ class bookDetail {
     }
 }
 
+const addBookToDisplay = document.getElementById("bookDisplay")
+const btnAddBook = document.getElementById("addBook")
+
 function bookDisplay() {
-    while (i < myLibrary.length) {
-        addBookToDisplay.innerHTML += `<ul class="book"><li> NAME OF THE BOOK :${myLibrary[i].name}</li>
+    addBookToDisplay.innerHTML = " "
+    let i = 0
+    for (i = 0; i < myLibrary.length; i++) {
+        addBookToDisplay.innerHTML += `<ul class="book">
+        <li> NAME OF THE BOOK :${myLibrary[i].name}</li>
         <li> AUTHOR : ${myLibrary[i].author}</li>
         <li> PUBLISH YEAR : ${myLibrary[i].publishYear}</li>
-        <button class="remove">remove</button>
+        <button class="remove" onClick=()=>remove(${myLibrary[i].id})>remove</button>
         </ul>`
         i++
-
-
     }
-
 }
 function addBookToLibrary() {
     const name = prompt("name of the book")
@@ -58,16 +61,28 @@ function addBookToLibrary() {
 
 }
 
-const addBookToDisplay = document.getElementById("bookDisplay")
-const btnAddBook = document.getElementById("addBook")
 btnAddBook.addEventListener("click", addBookToLibrary)
 
 bookDisplay()
 
 const btnRemove = document.getElementsByClassName("remove")
-for (let b = 0; b < btnRemove.length; b++) {
-    function removeBook() {
-        console.log("remove book")
+for (let b = 0; b < myLibrary.length; b++) {
+
+    function remove(id) {
+
+        let removedBook = myLibrary.filter((value, index) => index === b)
+        console.log(removedBook)
+        const index = myLibrary.indexOf(removedBook[0])
+        myLibrary.splice(index, 1)
+        console.log(myLibrary)
+        bookDisplay()
+
+
     }
-    btnRemove[b].addEventListener("click", removeBook)
+
+    btnRemove[b].addEventListener("click", remove)
 }
+
+
+
+
