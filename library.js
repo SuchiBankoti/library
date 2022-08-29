@@ -1,25 +1,27 @@
 let myLibrary = [
     {
-        id: 'kljsdkljflksjf',
+        id: 001,
         name: "rings of fire",
         author: "J.R Tolkein",
         publishYear: 1960
     }, {
+        id: 002,
         name: "wuthering heights",
         author: "emily bronte",
         publishYear: 1942
     }, {
+        id: 003,
         name: "peter pan",
         author: "megan markle",
         publishYear: 1698
-    },
-    {
+    }, {
+        id: 004,
         name: "super contra",
         author: "mark ruffalo",
         publishYear: 1234
 
-    },
-    {
+    }, {
+        id: 005,
         name: "da vinci code",
         author: "margin homer",
         publishYear: 5678
@@ -28,10 +30,15 @@ let myLibrary = [
 
 
 class bookDetail {
-    constructor(name, author, publishYear) {
+    constructor(name, author, publishYear, id) {
+        this.id = id
         this.name = name
         this.author = author
         this.publishYear = publishYear
+        this.status = this.changeStatus
+    }
+    changeStatus() {
+        console.log("read")
     }
 }
 
@@ -40,22 +47,34 @@ const btnAddBook = document.getElementById("addBook")
 
 function bookDisplay() {
     addBookToDisplay.innerHTML = " "
-    let i = 0
-    for (i = 0; i < myLibrary.length; i++) {
+
+    for (let i = 0; i < myLibrary.length; i++) {
         addBookToDisplay.innerHTML += `<ul class="book">
-        <li> NAME OF THE BOOK :${myLibrary[i].name}</li>
+       
+        <li> TITLE :${myLibrary[i].name}</li>
         <li> AUTHOR : ${myLibrary[i].author}</li>
         <li> PUBLISH YEAR : ${myLibrary[i].publishYear}</li>
-        <button class="remove" onClick=()=>remove(${myLibrary[i].id})>remove</button>
+        <li>ID : ${myLibrary[i].id}</li>
+        <button class="remove" onClick='remove(${myLibrary[i].id})'>remove</button>
+        <button class="status" onClick='check(event)'></button>
+        
         </ul>`
-        i++
     }
+
 }
+function check(value) {
+    const status = document.getElementsByClassName("status")
+    value.target.style.backgroundColor = "red"
+}
+
+
+
 function addBookToLibrary() {
+    const id = prompt("ID")
     const name = prompt("name of the book")
     const author = prompt("auhtor of the book")
     const publishYear = prompt("publish year of the book")
-    const book = new bookDetail(name, author, publishYear)
+    const book = new bookDetail(id, name, author, publishYear)
     myLibrary.push(book)
     bookDisplay()
 
@@ -65,22 +84,11 @@ btnAddBook.addEventListener("click", addBookToLibrary)
 
 bookDisplay()
 
-const btnRemove = document.getElementsByClassName("remove")
-for (let b = 0; b < myLibrary.length; b++) {
 
-    function remove(id) {
-
-        let removedBook = myLibrary.filter((value, index) => index === b)
-        console.log(removedBook)
-        const index = myLibrary.indexOf(removedBook[0])
-        myLibrary.splice(index, 1)
-        console.log(myLibrary)
-        bookDisplay()
-
-
-    }
-
-    btnRemove[b].addEventListener("click", remove)
+function remove(value) {
+    const index = myLibrary.findIndex((element) => element.id == value)
+    myLibrary.splice(index, 1)
+    bookDisplay()
 }
 
 
