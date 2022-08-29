@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+}
+
+#bookDisplay {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#book {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: aliceblue;
+    border: 1px solid black;
+    margin: 20px;
+    padding: 10px;
+
+}
+
+li {
+    list-style: none;
+}
+
+button {
+    margin: 20px;
+}
