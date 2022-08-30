@@ -2,8 +2,8 @@ let myLibrary = []
 
 
 class bookDetail {
-    constructor(name, author, publishYear, id) {
-        this.id = id
+    constructor(name, author, publishYear,) {
+        this.id = new Date().getMilliseconds()
         this.name = name
         this.author = author
         this.publishYear = publishYear
@@ -40,17 +40,16 @@ function bookDisplay() {
 }
 
 function status(value1, value2) {
-    console.log("okay")
     value1(value2)
 }
 
 
 function addBookToLibrary() {
-    const id = prompt("ID")
+    // const id = prompt("ID")
     const name = prompt("name of the book")
     const author = prompt("auhtor of the book")
     const publishYear = prompt("publish year of the book")
-    const book = new bookDetail(id, name, author, publishYear)
+    const book = new bookDetail(name, author, publishYear)
     myLibrary.push(book)
     bookDisplay()
 }
