@@ -3,41 +3,41 @@ let myLibrary = []
 
 class bookDetail {
     constructor(name, author, publishYear,) {
-        this.id = new Date().getMilliseconds()
+        this.id = new Date().valueOf()
         this.name = name
         this.author = author
         this.publishYear = publishYear
-        this.status = this.changeStatus
+        // this.status = this.changeStatus
+        this.read = false;
+        this.status = "unread"
     }
-    changeStatus = (value) => {
-        if (value.target.innerHTML == "unread") {
-            value.target.innerHTML = "read"
-            value.target.style.color = "white"
-            value.target.style.backgroundColor = "red"
-        }
-        else {
-            value.target.innerHTML = "unread"
-        }
+    toggleStatus = () => {
+        this.read = !this.read;
     }
 }
-
+const toggle = new bookDetail().toggleStatus
 const addBookToDisplay = document.getElementById("bookDisplay")
 
 function bookDisplay() {
     addBookToDisplay.innerHTML = " "
+    console.log("bookdispolay")
 
-    for (let i = 0; i < myLibrary.length; i++) {
-        addBookToDisplay.innerHTML += `<ul class="book">
-       
-        <li> TITLE :${myLibrary[i].name}</li>
-        <li> AUTHOR : ${myLibrary[i].author}</li>
-        <li> PUBLISH YEAR : ${myLibrary[i].publishYear}</li>
-        <li>ID : ${myLibrary[i].id}</li>
-        <button class="remove" onClick='remove(${myLibrary[i].id})'>remove</button>
-        <button onClick='status(${myLibrary[i].status},event)'>unread</button>
+    addBookToDisplay.innerHTML +=
+        myLibrary.map((value) => {
+            return `<ul class="book">
+        <li> TITLE :${value.name}</li>
+        <li> AUTHOR : ${value.author}</li>
+        <li> PUBLISH YEAR : ${value.publishYear}</li>
+        <li>ID : ${value.id}</li>
+        <button>${value.status}</button>
+        <button onClick='remove(${value.id})'>remove</button>
+        <button onClick='read(${value.id})'></button>
         </ul>`
-    }
+        }).join("")
+
 }
+
+
 
 function status(value1, value2) {
     value1(value2)
@@ -62,6 +62,20 @@ function remove(value) {
     bookDisplay()
 }
 
+function read(value) {
+    const index = myLibrary.findIndex((element) => element.id == value)
+    if (myLibrary[index].read == false) {
+        toggle()
+        myLibrary[index].status = "read"
+        bookDisplay()
+    }
+    // else {
+    //     toggle()
+    //     myLibrary[index].status = "unread"
+    //     bookDisplay()
+    // }
+    //   ee.target.style.backgroundColor="red"
+}
 
 
 
