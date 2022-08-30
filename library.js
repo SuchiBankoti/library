@@ -1,32 +1,4 @@
-let myLibrary = [
-    {
-        id: 001,
-        name: "rings of fire",
-        author: "J.R Tolkein",
-        publishYear: 1960
-    }, {
-        id: 002,
-        name: "wuthering heights",
-        author: "emily bronte",
-        publishYear: 1942
-    }, {
-        id: 003,
-        name: "peter pan",
-        author: "megan markle",
-        publishYear: 1698
-    }, {
-        id: 004,
-        name: "super contra",
-        author: "mark ruffalo",
-        publishYear: 1234
-
-    }, {
-        id: 005,
-        name: "da vinci code",
-        author: "margin homer",
-        publishYear: 5678
-    }
-]
+let myLibrary = []
 
 
 class bookDetail {
@@ -37,13 +9,19 @@ class bookDetail {
         this.publishYear = publishYear
         this.status = this.changeStatus
     }
-    changeStatus() {
-        console.log("read")
+    changeStatus = (value) => {
+        if (value.target.innerHTML == "unread") {
+            value.target.innerHTML = "read"
+            value.target.style.color = "white"
+            value.target.style.backgroundColor = "red"
+        }
+        else {
+            value.target.innerHTML = "unread"
+        }
     }
 }
 
 const addBookToDisplay = document.getElementById("bookDisplay")
-const btnAddBook = document.getElementById("addBook")
 
 function bookDisplay() {
     addBookToDisplay.innerHTML = " "
@@ -56,17 +34,15 @@ function bookDisplay() {
         <li> PUBLISH YEAR : ${myLibrary[i].publishYear}</li>
         <li>ID : ${myLibrary[i].id}</li>
         <button class="remove" onClick='remove(${myLibrary[i].id})'>remove</button>
-        <button class="status" onClick='check(event)'></button>
-        
+        <button onClick='status(${myLibrary[i].status},event)'>unread</button>
         </ul>`
     }
-
-}
-function check(value) {
-    const status = document.getElementsByClassName("status")
-    value.target.style.backgroundColor = "red"
 }
 
+function status(value1, value2) {
+    console.log("okay")
+    value1(value2)
+}
 
 
 function addBookToLibrary() {
@@ -77,13 +53,9 @@ function addBookToLibrary() {
     const book = new bookDetail(id, name, author, publishYear)
     myLibrary.push(book)
     bookDisplay()
-
 }
 
-btnAddBook.addEventListener("click", addBookToLibrary)
-
 bookDisplay()
-
 
 function remove(value) {
     const index = myLibrary.findIndex((element) => element.id == value)
