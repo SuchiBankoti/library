@@ -1,7 +1,7 @@
 let myLibrary = []
 
 class bookDetail {
-    constructor(name, author, publishYear,) {
+    constructor(name, author, publishYear) {
         this.id = new Date().valueOf()
         this.name = name
         this.author = author
@@ -10,12 +10,12 @@ class bookDetail {
     }
     toggleStatus = () => {
         this.read = !this.read;
-        console.log(this.read)
     }
 }
 const addBookToDisplay = document.getElementById("bookDisplay")
 
 function bookDisplay() {
+
     addBookToDisplay.innerHTML = " "
     addBookToDisplay.innerHTML = myLibrary.map((value) => {
         return `<ul class="book">
@@ -23,12 +23,9 @@ function bookDisplay() {
         <li> AUTHOR : ${value.author}</li>
         <li> PUBLISH YEAR : ${value.publishYear}</li>
         <button onClick='remove(${value.id})'>remove</button>
-        <button onClick='call(${value.toggleStatus})>'${(value.read) ? 'read' : 'unread'}</button>
+        <button onClick='(${value.toggleStatus})()'>${(value.read) ? 'read' : 'unread'}</button>
         </ul>`
     }).join("")
-}
-function call(value) {
-    value()
 }
 
 function addBookToLibrary() {
