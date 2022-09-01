@@ -23,7 +23,7 @@ function bookDisplay() {
         <li> AUTHOR : ${value.author}</li>
         <li> PUBLISH YEAR : ${value.publishYear}</li>
         <button onClick='remove(${value.id})'>remove</button>
-        <button onClick='(${value.toggleStatus})()'>${(value.read) ? 'read' : 'unread'}</button>
+        <button onClick='toggle(${value.id})'>${(value.read) ? 'read' : 'unread'}</button>
         </ul>`
     }).join("")
 }
@@ -43,6 +43,13 @@ function remove(value) {
     myLibrary.splice(index, 1)
     bookDisplay()
 }
+
+function toggle(id) {
+  const index= myLibrary.findIndex(element => element.id === id)
+ myLibrary[index].toggleStatus()
+    bookDisplay()
+}
+    
 
 bookDisplay()
 
